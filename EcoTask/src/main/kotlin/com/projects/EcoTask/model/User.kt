@@ -14,5 +14,11 @@ data class User(
     val username: String,
 
     @Column(name = "password_validation", nullable = false, length = 256)
-    val passwordValidation: String
+    val passwordValidation: String,
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    val rewards: List<Reward> = emptyList(),
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    val tasks: List<Tasks> = emptyList()
 )

@@ -17,12 +17,17 @@ data class Tasks(
     @Column(name = "taskDesc", length = 256)
     val taskDesc: String? = null,
 
-    @Column(name = "taskTypeId", nullable = false)
-    val taskTypeId: Long,
-
     @Column(name = "taskDueDate", nullable = false)
     val taskDueDate: Long,
 
     @Column(name = "taskCreatedAt", nullable = false)
-    val taskCreatedAt: Long
+    val taskCreatedAt: Long,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    val user: User,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "taskTypeId", nullable = false)
+    val taskType: TaskType
 )

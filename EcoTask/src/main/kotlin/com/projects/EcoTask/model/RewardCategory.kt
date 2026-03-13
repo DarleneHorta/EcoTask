@@ -11,5 +11,8 @@ data class RewardCategory (
     val id: Long = 0,
 
     @Column(name = "rewardCategory", nullable = false, unique = true, length = 256)
-    val rewardCategory: String
+    val rewardCategory: String,
+
+    @OneToMany(mappedBy = "rewardCategory", fetch = FetchType.LAZY)
+    val rewards: List<Reward> = emptyList()
 )

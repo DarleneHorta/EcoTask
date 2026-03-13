@@ -11,5 +11,8 @@ data class TaskType(
     val id: Long = 0,
 
     @Column(name = "taskType", nullable = false, unique = true, length = 256)
-    val taskType: String
+    val taskType: String,
+
+    @OneToMany(mappedBy = "taskType", fetch = FetchType.LAZY)
+    val tasks: List<Tasks> = emptyList()
 )

@@ -11,13 +11,18 @@ data class Reward (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(name = "userId", nullable = false)
-    val userId: Long,
-
     @Column(name = "rewardDate", nullable = false)
     val rewardDate: Long,
 
     @Column(name = "rewardCategoryId", nullable = false)
-    val rewardCategoryId: Long
+    val rewardCategoryId: Long,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    val user: User,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rewardCategoryId", nullable = false)
+    val rewardCategory: RewardCategory
 
 )

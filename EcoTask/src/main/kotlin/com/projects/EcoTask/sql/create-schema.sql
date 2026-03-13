@@ -13,6 +13,7 @@ create table if not exists dbo.tasks(
     taskTypeId int not null,
     taskDueDate bigint not null,
     taskCreatedAt bigint not null,
+    userId int not null,
 
 );
 
