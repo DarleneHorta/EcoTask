@@ -3,6 +3,7 @@ create schema EcoTasks.dbo;
 create table if not exists dbo.users(
     id int generated always as identity primary key,
     username VARCHAR(64) unique not null,
+    email VARCHAR(256) unique not null,
     password_validation VARCHAR(256) not null
 );
 

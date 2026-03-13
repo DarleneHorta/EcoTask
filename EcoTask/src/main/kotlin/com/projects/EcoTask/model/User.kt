@@ -13,6 +13,9 @@ data class User(
     @Column(nullable = false, unique = true, length = 64)
     val username: String,
 
+    @Column(nullable = false, unique = true, length = 256)
+    val email: String,
+
     @Column(name = "password_validation", nullable = false, length = 256)
     val passwordValidation: String,
 
