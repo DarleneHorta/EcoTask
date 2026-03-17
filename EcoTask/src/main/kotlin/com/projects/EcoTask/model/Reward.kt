@@ -1,8 +1,20 @@
 package com.projects.EcoTask.model
 
 import jakarta.persistence.*
-import java.sql.Date
 
+
+/**
+ * Represents a reward granted to a user for completing tasks
+ * in the EcoTasks system.
+ *
+ * Rewards help motivate users by recognizing their contributions
+ * to environmentally friendly activities.
+ *
+ * Each reward is associated with:
+ * - a user
+ * - a reward category
+ * - the date the reward was granted
+ */
 @Entity
 @Table(name = "reward", schema = "dbo")
 data class Reward (

@@ -2,6 +2,17 @@ package com.projects.EcoTask.model
 
 import jakarta.persistence.*
 
+/**
+ * Represents a category of rewards available in the EcoTasks system.
+ *
+ * Reward categories allow the platform to organize different types
+ * of rewards that users can earn, such as:
+ * - eco points
+ * - badges
+ * - achievements
+ *
+ * Each reward belongs to a single reward category.
+ */
 @Entity
 @Table(name = "rewardCategory", schema = "dbo")
 data class RewardCategory (

@@ -3,6 +3,22 @@ package com.projects.EcoTask.model
 import jakarta.persistence.*
 import java.sql.Date
 
+/**
+ * Represents a task that a user needs to complete.
+ *
+ * Tasks describe environmentally friendly actions that users
+ * can perform within the EcoTasks platform.
+ *
+ * Each task includes information such as:
+ * - task name
+ * - description
+ * - task type
+ * - due date
+ * - creation date
+ *
+ * A task belongs to a specific user and is associated with
+ * a particular task type.
+ */
 @Entity
 @Table(name = "tasks", schema = "dbo")
 data class Tasks(

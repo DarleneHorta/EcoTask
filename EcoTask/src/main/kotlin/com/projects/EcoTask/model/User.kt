@@ -2,6 +2,15 @@ package com.projects.EcoTask.model
 
 import jakarta.persistence.*
 
+/**
+ * Represents a registered user in the EcoTasks system.
+ *
+ * Each user can create and manage tasks and receive rewards
+ * for completing environmentally friendly activities.
+ *
+ * This entity maps to the "users" table in the database and
+ * stores authentication and identification information.
+ */
 @Entity
 @Table(name = "users", schema = "dbo")
 data class User(
