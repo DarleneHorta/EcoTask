@@ -24,12 +24,13 @@ class AuthController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody request: LoginRequest): ResponseEntity<AuthResponse> {
+    fun login(@RequestBody request: LoginRequest): AuthResponse {
 
-        authService.login(request)
+        val token = authService.login(request)
 
-        return ResponseEntity.ok(
-            AuthResponse("Login successful")
+        return AuthResponse(
+            message = "Login successful",
+            token = token
         )
     }
 }

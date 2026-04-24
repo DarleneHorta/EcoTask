@@ -1,5 +1,6 @@
 package com.projects.EcoTask.model
 
+import com.projects.EcoTask.repository.TaskRepository
 import jakarta.persistence.*
 import java.sql.Date
 
@@ -33,6 +34,9 @@ data class Tasks(
     @Column(name = "taskDesc", length = 256)
     val taskDesc: String? = null,
 
+    @Column(name = "isCompleted", length = 256)
+    val isCompleted: Boolean = false,
+
     @Column(name = "taskDueDate", nullable = false)
     val taskDueDate: Long,
 
@@ -44,6 +48,41 @@ data class Tasks(
     val user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "taskTypeId", nullable = false)
-    val taskType: TaskType
+    @JoinColumn(name = "taskType", nullable = false)
+    val taskType: String
 )
+
+data class CreateTaskRequest(
+    val taskName: String,
+    val taskDesc: String?,
+    val taskTypeId: Long,
+    val dueDate: Long
+)
+
+data class UpdateTaskRequest(
+    val taskName: String?,
+    val taskDesc: String?,
+    val dueDate: Long?
+)
+
+data class TaskResponse(
+    val id: Long,
+    val taskName: String,
+    val taskDesc: String?,
+    val dueDate: Long,
+    val createdAt: Long,
+    val completed: Boolean,
+    val taskType: String
+)
+
+fun Tasks.toResponse(): TaskResponse {
+    return TaskResponse(
+        id = id,
+        taskName = taskName,
+        taskDesc = taskDesc,
+        dueDate = taskDueDate,
+        createdAt = taskCreatedAt,
+        completed = isCompleted,
+        taskType = taskType
+    )
+}

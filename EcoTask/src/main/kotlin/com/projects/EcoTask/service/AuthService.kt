@@ -4,13 +4,15 @@ import com.projects.EcoTask.model.LoginRequest
 import com.projects.EcoTask.model.RegisterRequest
 import com.projects.EcoTask.model.User
 import com.projects.EcoTask.repository.UserRepository
+import com.projects.EcoTask.security.JwtService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val jwtService: JwtService
 ) {
     //  TODO
     // criar classes de exceções para lançar erros HTTP de acordo com o tipo de erro!!!
@@ -30,18 +32,15 @@ class AuthService(
         return userRepository.save(user)
     }
 
-    fun login(request: LoginRequest): User {
+    fun login(request: LoginRequest): String {
 
         val user = userRepository.getUserByName(request.username)
-            ?: throw IllegalArgumentException("Invalid credentials")
+            ?: throw RuntimeException("Invalid credentials")
 
-        val passwordValid =
-            passwordEncoder.matches(request.password, user.passwordValidation)
-
-        if (!passwordValid) {
-            throw IllegalArgumentException("Invalid credentials")
+        if (!passwordEncoder.matches(request.password, user.passwordValidation)) {
+            throw RuntimeException("Invalid credentials")
         }
 
-        return user
+        return jwtService.generateToken(user.username)
     }
 }
